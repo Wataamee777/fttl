@@ -7,7 +7,6 @@ export interface TimeInfo {
 
 export function time(): TimeInfo {
   const now = new Date();
-
   return {
     utc: now.toISOString(),
     jst: new Date(
@@ -18,13 +17,8 @@ export function time(): TimeInfo {
   };
 }
 
-export function unix(): number {
-  return Math.floor(Date.now() / 1000);
-}
-
-export function unixMs(): number {
-  return Date.now();
-}
+export const unix = () => Math.floor(Date.now() / 1000);
+export const unixMs = () => Date.now();
 
 export function tz(zone = "UTC"): string {
   return new Date().toLocaleString("en-US", { timeZone: zone });
