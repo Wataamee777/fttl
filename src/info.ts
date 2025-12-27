@@ -26,7 +26,6 @@ export interface ServerInfo {
 
 export function info(): ServerInfo {
   const cpus = os.cpus();
-
   return {
     time: time(),
     system: {
