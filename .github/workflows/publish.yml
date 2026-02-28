@@ -19,8 +19,9 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
-      - run: npm ci
-      
+      - run: npm install --package-lock-only  # ロックファイルを生成
+      - run: npm ci                           # それを使ってクリーンインストール
+
       # 実際に公開するコマンド
       # --provenance を付けると公開元の信頼性がnpm上で証明されます
       - run: npm publish --provenance --access public
