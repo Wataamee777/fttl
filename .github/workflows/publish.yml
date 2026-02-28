@@ -1,0 +1,28 @@
+name: Publish Package to npm
+
+on:
+  release:
+    types: [published] # GitHubで「Release」を作成した時に発火
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # OIDC認証のために書き込み権限が必要
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm ci
+      
+      # 実際に公開するコマンド
+      # --provenance を付けると公開元の信頼性がnpm上で証明されます
+      - run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # Trusted Publishers設定済みなら自動で解決されます
