@@ -1,6 +1,6 @@
 {
-  "name": "fttl",
-  "version": "1.0.0",
+  "name": "@wataamee777/fttl",
+  "version": "1.0.11",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
